@@ -10,8 +10,7 @@ mongo.connect(url, (err, client) => {
     console.error(err);
     return;
   }
-  console.log('Connected successfully to server')
-
+  console.log('Connected successfully to server');
   reviews = client.db('reviews').collection('reviewPhotos');
   characteristics = client.db('reviews').collection('mergedCharacteristics');
 });
