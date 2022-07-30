@@ -6,7 +6,7 @@ var characteristics;
 
 mongo.connect(url, (err, client) => {
   if (err) {
-    console.error(err);
+    console.log(err);
     return;
   }
   console.log('Connected successfully to server');
@@ -39,11 +39,9 @@ let buildMetaObject = function (reviewData) {
   for (var i = 0; i < reviewData.length; i++) {
 
     // create characteristics object
-    console.log(reviewData[i]);
     let charArray = reviewData[i].characteristics
     for (var j = 0; j < charArray.length; j++) {
       let type = charArray[j].name;
-      console.log('type', type)
       if (characteristics[type]) {
         characteristics[type].value = (characteristics[type].value + charArray[j].value);
       } else {
@@ -82,11 +80,9 @@ let buildMetaObject = function (reviewData) {
     characteristics: characteristics
   };
 
-  console.log(metaObj);
+
   return metaObj;
 }
-
-
 
 module.exports.findReviews = findReviews;
 module.exports.buildReviewObject = buildReviewObject;
