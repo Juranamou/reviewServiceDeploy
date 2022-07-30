@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const port = 3000;
 let db = require('./index.js');
+require('newrelic');
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
