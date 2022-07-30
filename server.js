@@ -15,7 +15,6 @@ app.get('/reviews/:id', (req, res) => {
 })
 
 app.get('/meta/:id', (req, res) => {
-  console.log('meta')
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildMetaObject(data); })

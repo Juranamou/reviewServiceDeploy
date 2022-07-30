@@ -16,13 +16,10 @@ mongo.connect(url, (err, client) => {
 
 
 let findReviews = function (productId) {
-  console.log('productId', productId);
-  // console.log('test query', reviews.find({product_id: productId}))
   return (reviews.find({productId: productId}).toArray());
 }
 
 let buildReviewObject = function (reviewData) {
-  // console.log('review data')
   let reviewObj = {
     product: reviewData[0].productId,
     results: reviewData
@@ -32,8 +29,19 @@ let buildReviewObject = function (reviewData) {
 
 let buildMetaObject = function (reviewData) {
   console.log('review data', reviewData);
+  let ratings = {};
+  for (var i = 0; i < reviewData.length; i++) {
+    let rating = reviewData[i].rating;
+    console.log('ratings!!', rating);
+    if(ratings[rating]) {
+      ratings[rating]++;
+    } else {
+      ratings[rating] = 1;
+    }
+  }
+
   let metaObj = {
-    test: 'test'
+    ratings: ratings
   };
   return metaObj;
 }
