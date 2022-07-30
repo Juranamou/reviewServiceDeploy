@@ -1,4 +1,3 @@
-
 const mongo = require('mongodb').MongoClient;
 
 var url = 'mongodb://localhost:27017';
@@ -16,7 +15,7 @@ mongo.connect(url, (err, client) => {
 
 
 let findReviews = function (productId) {
-  return (reviews.find({productId: productId}).toArray());
+  return (reviews.find({ productId: productId }).toArray());
 }
 
 let buildReviewObject = function (reviewData) {
@@ -27,24 +26,67 @@ let buildReviewObject = function (reviewData) {
   return reviewObj;
 }
 
+let setAvg = function(characteristic, length) {
+  if (characteristic) {
+    characteristic.value = (characteristic.value / length);
+  }
+}
+
 let buildMetaObject = function (reviewData) {
-  console.log('review data', reviewData);
   let ratings = {};
+  let recommended = {};
+  let characteristics = {};
   for (var i = 0; i < reviewData.length; i++) {
+
+    // create characteristics object
+    console.log(reviewData[i]);
+    let charArray = reviewData[i].characteristics
+    for (var j = 0; j < charArray.length; j++) {
+      let type = charArray[j].name;
+      console.log('type', type)
+      if (characteristics[type]) {
+        characteristics[type].value = (characteristics[type].value + charArray[j].value);
+      } else {
+        characteristics[type] = { id: charArray[j].id, value: charArray[j].value };
+      }
+    }
+
+    // create recommended object
+    let recommend = reviewData[i].recommend;
+    if (recommended[recommend]) {
+      recommended[recommend]++;
+    } else {
+      recommended[recommend] = 1;
+    }
+
+    // create rating object
     let rating = reviewData[i].rating;
-    console.log('ratings!!', rating);
-    if(ratings[rating]) {
+    if (ratings[rating]) {
       ratings[rating]++;
     } else {
       ratings[rating] = 1;
     }
   }
 
+  setAvg(characteristics.Quality, reviewData.length);
+  setAvg(characteristics.Comfort, reviewData.length);
+  setAvg(characteristics.Length, reviewData.length);
+  setAvg(characteristics.Fit, reviewData.length);
+  setAvg(characteristics.Width, reviewData.length);
+  setAvg(characteristics.Size, reviewData.length);
+
   let metaObj = {
-    ratings: ratings
+    product_id: reviewData[0].productId,
+    ratings: ratings,
+    recommended: recommended,
+    characteristics: characteristics
   };
+
+  console.log(metaObj);
   return metaObj;
 }
+
+
 
 module.exports.findReviews = findReviews;
 module.exports.buildReviewObject = buildReviewObject;
