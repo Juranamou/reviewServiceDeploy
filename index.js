@@ -2,7 +2,6 @@ const mongo = require('mongodb').MongoClient;
 
 var url = 'mongodb://localhost:27017';
 var reviews;
-var characteristics;
 
 mongo.connect(url, (err, client) => {
   if (err) {
