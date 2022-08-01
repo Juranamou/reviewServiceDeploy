@@ -105,7 +105,11 @@ let handlePost = async function(review) {
 }
 
 let handleHelpful = function(reviewId) {
-  return (reviews.findOneAndUpdate({_id:1}, { $inc: { "helpfulness" : 1 } }))
+  return (reviews.findOneAndUpdate({_id: reviewId}, { $inc: { "helpfulness" : 1 } }))
+}
+
+let handleReport = function(reviewId) {
+  return (reviews.findOneAndUpdate({_id: reviewId}, { $set: { "reported" : "true" } }))
 }
 
 module.exports.findReviews = findReviews;
@@ -113,4 +117,5 @@ module.exports.buildReviewObject = buildReviewObject;
 module.exports.buildMetaObject = buildMetaObject;
 module.exports.handlePost = handlePost;
 module.exports.handleHelpful = handleHelpful;
+module.exports.handleReport = handleReport;
 module.exports.reviews = reviews;

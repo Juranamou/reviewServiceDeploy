@@ -37,6 +37,13 @@ app.put('/helpful/:reviewId', (req, res) => {
   .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
+app.put('/report/:reviewId', (req, res) => {
+  let reviewId = parseInt(req.params.reviewId);
+  db.handleReport(reviewId)
+  .then(() => {res.send('goodgood').status(200)})
+  .catch((err) => {res.send('badbad').status(); console.log(err)})
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
