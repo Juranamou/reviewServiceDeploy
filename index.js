@@ -85,6 +85,17 @@ let buildMetaObject = function (reviewData) {
 }
 
 let handlePost = async function(review) {
+  // {1:5, 2:5, 3:5} to [{id: 1, value:5}, {id: 2, value: 5}]
+  // reformat characteristics:
+  let idArray = Object.keys(review.characteristics);
+  let newChars = [];
+  for (var i = 0; i < idArray.length; i++) {
+    let charObj = {};
+    charObj['id'] = idArray[i];
+    charObj['value'] = review.characteristics[idArray[i]];
+    newChars.push(charObj);
+  }
+  review.characteristics = newChars;
   review.productId = review.product_id;
   review.reported = "false";
   count = await reviews.count();
