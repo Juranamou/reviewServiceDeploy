@@ -84,6 +84,15 @@ let buildMetaObject = function (reviewData) {
   return metaObj;
 }
 
+let handlePost = async function(review) {
+  review.productId = review.product_id;
+  review.reported = "false";
+  count = await reviews.count();
+  review._id = count + 1;
+  return (reviews.insert(review))
+}
+
 module.exports.findReviews = findReviews;
 module.exports.buildReviewObject = buildReviewObject;
 module.exports.buildMetaObject = buildMetaObject;
+module.exports.handlePost = handlePost;
