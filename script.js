@@ -9,13 +9,29 @@ export const options = {
   duration: '15s',
 };
 
+var data = {
+  "product_id": 1,
+  "rating": 5,
+  "summary": "Ok",
+  "body": "Ok",
+  "recommend": true,
+  "name": "username123",
+  "email": "email@email.com",
+  "photos": ["myspace.com/yumyum123"],
+  "characteristics": { "3": 5, "2": 5, "4": 5, "1": 5 }
+};
+
 export default function () {
-  const res = http.get('http://localhost:3000/meta/5');
-  // sleep(1);
+
+  let res = http.post('http://localhost:3000/postReview', JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' },
+  });
   // check to see what kind of server response were getting
   check(res, {
     'status was 200': (r) => r.status == 200,
+    'transaction time < 2000ms': (r) => r.timings.duration < 2000,
+    'transaction time < 500ms': (r) => r.timings.duration < 500,
     'transaction time < 200ms': (r) => r.timings.duration < 200,
     'transaction time < 100ms': (r) => r.timings.duration < 100
-});
+  });
 }

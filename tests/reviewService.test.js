@@ -44,21 +44,4 @@ describe('insert', () => {
   });
 });
 
-// //
-// test('send a post request then get the data', async () => {
-//   await axios.post.mockImplementation('/postReview', {
-//     "product_id": 1,
-//     "rating": 5,
-//     "summary": "Ok",
-//     "body": "Ok",
-//     "recommend": true,
-//     "name": "username123",
-//     "email": "email@email.com",
-//     "photos": ["myspace.com/yumyum123"],
-//     "characteristics": {"3": 5, "2": 5, "4": 5, "1": 5}
-//     })
-//       // .then(() => {return reviews.count();})
-//       // .then((id) => {return axios.get(`/reviews/${id}`);})
-//       // .then((data) => {console.log(data);})
-//   // expect(sum(1, 2)).toBe(3);
-// });
+\
