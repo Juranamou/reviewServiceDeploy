@@ -27,7 +27,7 @@ app.get('/meta/:id', (req, res) => {
 app.post('/postReview', (req, res) => {
   db.handlePost(req.body)
     .then(() => {res.send('goodgood').status(200)})
-    .catch(() => {res.send('badbad').status(500)})
+    .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
 app.listen(port, () => {

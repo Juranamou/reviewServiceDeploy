@@ -98,7 +98,9 @@ let handlePost = async function(review) {
   review.characteristics = newChars;
   review.productId = review.product_id;
   review.reported = "false";
+  review.recommend = review.recommend.toString();
   count = await reviews.count();
+  review.date = new Date();
   review._id = count + 1;
   return (reviews.insert(review))
 }
@@ -107,3 +109,4 @@ module.exports.findReviews = findReviews;
 module.exports.buildReviewObject = buildReviewObject;
 module.exports.buildMetaObject = buildMetaObject;
 module.exports.handlePost = handlePost;
+module.exports.reviews = reviews;
