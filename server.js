@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.get('44.208.10.18/reviews/:id', (req, res) => {
+  console.log('trigrd');
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildReviewObject(data); })
@@ -17,6 +18,7 @@ app.get('44.208.10.18/reviews/:id', (req, res) => {
 })
 
 app.get('/meta/:id', (req, res) => {
+  console.log('trigrd');
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildMetaObject(data); })
