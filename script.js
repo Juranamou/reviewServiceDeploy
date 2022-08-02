@@ -23,11 +23,11 @@ var data = {
 
 export default function () {
 
-  // let res = http.post('http://localhost:3000/postReview', JSON.stringify(data), {
-  //   headers: { 'Content-Type': 'application/json' },
-  // });
+  let res = http.post('http://localhost:3000/postReview', JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-  let res = http.put('http://localhost:3000/helpful/1');
+  // let res = http.put('http://localhost:3000/report/1');
 
 
   // check to see what kind of server response were getting

@@ -1,5 +1,5 @@
 const mongo = require('mongodb').MongoClient;
-
+const { ObjectID } = require('mongodb');
 var url = 'mongodb://localhost:27017';
 var reviews;
 
@@ -9,7 +9,7 @@ mongo.connect(url, (err, client) => {
     return;
   }
   console.log('Connected successfully to server');
-  reviews = client.db('reviews').collection('everything');
+  reviews = client.db('reviews').collection('everything2');
 });
 
 
@@ -98,18 +98,16 @@ let handlePost = async function(review) {
   review.productId = review.product_id;
   review.reported = "false";
   review.recommend = review.recommend.toString();
-  count = await reviews.count();
   review.date = new Date();
-  review._id = count + 1;
-  return (reviews.insert(review))
+  return (reviews.insert(review));
 }
 
 let handleHelpful = function(reviewId) {
-  return (reviews.findOneAndUpdate({_id: reviewId}, { $inc: { "helpfulness" : 1 } }))
+  return (reviews.findOneAndUpdate({_id: ObjectID(reviewId)}, { $inc: { "helpfulness" : 1 } }))
 }
 
 let handleReport = function(reviewId) {
-  return (reviews.findOneAndUpdate({_id: reviewId}, { $set: { "reported" : "true" } }))
+  return (reviews.findOneAndUpdate({_id: ObjectID(reviewId)}, { $set: { "reported" : "true" } }))
 }
 
 module.exports.findReviews = findReviews;
