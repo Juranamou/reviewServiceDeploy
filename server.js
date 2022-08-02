@@ -16,7 +16,7 @@ app.get('44.208.10.18/reviews/:id', (req, res) => {
     .catch(() => { res.sendStatus(500) });
 })
 
-app.get('44.208.10.18/meta/:id', (req, res) => {
+app.get('/meta/:id', (req, res) => {
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildMetaObject(data); })
@@ -24,20 +24,20 @@ app.get('44.208.10.18/meta/:id', (req, res) => {
     .catch(() => { res.sendStatus(500) });
 })
 
-app.post('44.208.10.18/postReview', (req, res) => {
+app.post('/postReview', (req, res) => {
   db.handlePost(req.body)
     .then(() => {res.send('goodgood').status(200)})
     .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
-app.put('44.208.10.18/helpful/:reviewId', (req, res) => {
+app.put('/helpful/:reviewId', (req, res) => {
   let reviewId = req.params.reviewId;
   db.handleHelpful(reviewId)
   .then(() => {res.send('goodgood').status(200)})
   .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
-app.put('44.208.10.18/report/:reviewId', (req, res) => {
+app.put('/report/:reviewId', (req, res) => {
   let reviewId = req.params.reviewId;
   db.handleReport(reviewId)
   .then(() => {res.send('goodgood').status(200)})
