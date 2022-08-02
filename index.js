@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient;
 const { ObjectID } = require('mongodb');
-var url = 'mongodb://localhost:27017';
+var url = 'mongodb://poop:poop123@44.208.10.18:27017/?authMechanism=DEFAULT';
 var reviews;
 
 mongo.connect(url, (err, client) => {

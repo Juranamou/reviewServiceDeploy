@@ -8,7 +8,7 @@ let db = require('./index.js');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-app.get('/reviews/:id', (req, res) => {
+app.get('52.90.187.39/reviews/:id', (req, res) => {
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildReviewObject(data); })
@@ -16,7 +16,7 @@ app.get('/reviews/:id', (req, res) => {
     .catch(() => { res.sendStatus(500) });
 })
 
-app.get('/meta/:id', (req, res) => {
+app.get('52.90.187.39/meta/:id', (req, res) => {
   let prodId = parseInt(req.params.id);
   db.findReviews(prodId)
     .then((data) => { return db.buildMetaObject(data); })
@@ -24,20 +24,20 @@ app.get('/meta/:id', (req, res) => {
     .catch(() => { res.sendStatus(500) });
 })
 
-app.post('/postReview', (req, res) => {
+app.post('52.90.187.39/postReview', (req, res) => {
   db.handlePost(req.body)
     .then(() => {res.send('goodgood').status(200)})
     .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
-app.put('/helpful/:reviewId', (req, res) => {
+app.put('52.90.187.39/helpful/:reviewId', (req, res) => {
   let reviewId = req.params.reviewId;
   db.handleHelpful(reviewId)
   .then(() => {res.send('goodgood').status(200)})
   .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
-app.put('/report/:reviewId', (req, res) => {
+app.put('52.90.187.39/report/:reviewId', (req, res) => {
   let reviewId = req.params.reviewId;
   db.handleReport(reviewId)
   .then(() => {res.send('goodgood').status(200)})
