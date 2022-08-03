@@ -14,7 +14,7 @@ app.get('/reviews/:id', (req, res) => {
   db.findReviews(prodId)
     .then((data) => { return db.buildReviewObject(data); })
     .then((data) => { res.send(data).status(200) })
-    .catch(() => { res.sendStatus(500) });
+    .catch(() => { res.sendStatus(500); console.log(err); });
 })
 
 app.get('/meta/:id', (req, res) => {
