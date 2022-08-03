@@ -45,6 +45,11 @@ app.put('/report/:reviewId', (req, res) => {
   .catch((err) => {res.send('badbad').status(); console.log(err)})
 })
 
+app.get('/loaderio-ce6f8d38d58d05bd9084c0aa39cff06f/', (req, res) => {
+  let token = process.env.LOADER_TOKEN;
+  res.send(token);
+})
+
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}`);
 });
